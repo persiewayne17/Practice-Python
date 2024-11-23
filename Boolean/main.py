@@ -1,7 +1,7 @@
 #How to use variables, input/output functions, and simple loops
 #Introduction to conditional statements
 #Guessing Game with a given guess "Wayne"
-#this is a test drive
+#this is a test drive one
 guess = "Wayne"
 guess_word = False
 count = 0 
