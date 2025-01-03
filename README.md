@@ -32,9 +32,8 @@ Each project is located in its own directory. To run a project:
 
 ## Contributing
 
-Contributions are welcome!  If you have ideas for new projects or improvements to existing ones, feel free to submit a pull request.
+Contributions are welcome!  Feel free to submit a pull request if you have ideas for new projects or improvements to existing ones.
 
 
 ## License
-
-This repository is licensed under the [MIT License](LICENSE).  You are free to use, modify, and distribute the code for educational purposes.
+You can use, modify, and distribute the code for educational purposes.
