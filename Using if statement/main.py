@@ -1,60 +1,59 @@
-# Simple Bank Transaction System
-
 balance = 1000.0
 pin = 1234
 pin_count = 0
 
 def debit():
-    print("Enter your PIN:")
-    user_pin = int(input())
+    global pin_count  # Only needed if debit also checks pin_count
+    user_pin = int(input("Enter your PIN: "))
     if user_pin == pin:
         amount = float(input("Enter the amount to withdraw: "))
-        global balance
+        global balance  # Only needed if modifying balance
         if amount <= balance:
             balance -= amount
             print(f"Withdrawal successful. Your new balance is: {balance}")
+            pin_count = 0 # Reset pin_count on successful transaction
         else:
             print("Insufficient funds.")
     else:
         print("Incorrect PIN.")
+        pin_count += 1
 
 def credit():
-    print("Enter your PIN:")
-    user_pin = int(input())
-    while True:
-        global pin_count
+    global pin_count # Needed to modify global pin_count
+    user_pin = int(input("Enter your PIN: "))
+    if user_pin == pin:
+        amount = float(input("Enter the amount to deposit: "))
+        global balance
+        balance += amount
+        print(f"Deposit successful. Your new balance is: {balance}")
+        pin_count = 0 # Reset pin_count on successful transaction
+    else:
+        print("Incorrect PIN.")
         pin_count += 1
-        if pin_count <= 3:
-            if user_pin == pin:
-                amount = float(input("Enter the amount to deposit: "))
-                global balance
-                balance += amount
-                print(f"Deposit successful. Your new balance is: {balance}")
-            elif pin_count == 3 and user_pin != pin:
-                print("Incorrect PIN.")
-                break
-            else:
-                break
-        else:
+
+
+def main():
+    global pin_count # Needed to access global pin_count
+
+    while True:
+        if pin_count >= 3:
+            print("Too many incorrect PIN attempts. Account locked.")
             break
 
-#Main function to control the program flow
-def main():
-    while True:
-        print("")
-        print("1. Debit\n2. Credit\n3. Check Balance\n4. Exit")
+        print("\n1. Debit\n2. Credit\n3. Check Balance\n4. Exit")
         choice = int(input("Enter your choice: "))
-        global balance
+
         if choice == 1:
             debit()
         elif choice == 2:
             credit()
         elif choice == 3:
-            print(f"Your current balance is: {balance}");
+            print(f"Your current balance is: {balance}")
         elif choice == 4:
-            print("Thank you for using our banking system.")       
-            break;
+            print("Thank you for using our banking system.")
+            break
         else:
-            print("Incorrect PIN.")
+            print("Invalid choice.")
+
 
 main()
